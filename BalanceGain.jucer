@@ -13,6 +13,7 @@
               companyEmail="contact@balancemastering.com" pluginAUMainType="">
   <MAINGROUP id="KVgBPa" name="BalanceGain">
     <GROUP id="{C87943A9-B21E-0755-8745-1BC3A4F4F041}" name="Source">
+      <FILE id="DMi01l" name="FilmStrip.h" compile="0" resource="0" file="Source/FilmStrip.h"/>
       <FILE id="WDfNlU" name="AudioParameterFloatStepped.h" compile="0" resource="0"
             file="Source/AudioParameterFloatStepped.h"/>
       <FILE id="K9tIMk" name="PluginProcessor.cpp" compile="1" resource="0"
