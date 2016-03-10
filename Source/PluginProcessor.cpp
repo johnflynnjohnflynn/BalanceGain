@@ -14,6 +14,8 @@
 
 //==============================================================================
 PluginProcessor::PluginProcessor()
+    : stepMaster {nullptr},
+      xmlABState {"MYABSETTINGS"}
 {
                     // Add parameters here and in header enum
                     // (No spaces in name for XML)    name       min    max   default  stepSize  stepMaster/Slave

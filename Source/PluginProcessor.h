@@ -90,6 +90,11 @@ private:
         gain,                                           // in process())
     };
 
+    enum StepInfo {
+        stepsPerParam = 23, // odd number
+        stepsPerSidePerParam = (stepsPerParam - 1) / 2
+    };
+
     std::vector<AudioParameterFloatStepped*> params;    // (Eliminate downcasting by
                                                         // holding view of
                                                         // AudioParameterFloatStepped
@@ -97,21 +102,16 @@ private:
                                                         // Processor OwnedArray
                                                         // still owns.)
 
-    AudioParameterFloatStepped* stepMaster {nullptr};   // Keep pointer to stepMaster
+    AudioParameterFloatStepped* stepMaster;             // Keep pointer to stepMaster
 
-    XmlElement xmlABState {"MYABSETTINGS"};// A/B state holder
+    XmlElement xmlABState;                              // A/B state holder
+
+    void writeParamsToXml (XmlElement& xml);
+    void setParamsFromXml (const XmlElement& xml);
     
     template <typename FloatType>                       // Double precision enabled
     void process (AudioBuffer<FloatType>& buffer,       // processBlock() template
                   MidiBuffer& midiMessages);
-
-    void writeParamsToXml (XmlElement& xml);
-    void setParamsFromXml (const XmlElement& xml);
-
-    enum StepInfo {
-        stepsPerParam = 23, // odd number
-        stepsPerSidePerParam = (stepsPerParam - 1) / 2
-    };
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginProcessor)
