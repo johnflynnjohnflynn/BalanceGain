@@ -24,9 +24,9 @@
     - A/B comparisons
 */
 class PluginEditor  : public AudioProcessorEditor,
-                  public Button::Listener,
-                  public Slider::Listener,
-                  private Timer
+                      public Button::Listener,
+                      public Slider::Listener,
+                      private Timer
 {
 public:
     PluginEditor (PluginProcessor&);
