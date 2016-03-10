@@ -8,12 +8,12 @@
   ==============================================================================
 */
 
-#include "JFProcessor.h"
-#include "JFEditor.h"
+#include "PluginProcessor.h"
+#include "PluginEditor.h"
 
 
 //==============================================================================
-JFEditor::JFEditor (JFProcessor& p)
+PluginEditor::PluginEditor (PluginProcessor& p)
     : AudioProcessorEditor (&p),
       buttonAB ("A-B"),
       buttonCopyAB ("Copy"),
@@ -75,17 +75,17 @@ JFEditor::JFEditor (JFProcessor& p)
     startTimerHz (30);
 }
 
-JFEditor::~JFEditor()
+PluginEditor::~PluginEditor()
 {
 }
 
 //==============================================================================
-void JFEditor::paint (Graphics& g)
+void PluginEditor::paint (Graphics& g)
 {
     g.fillAll (Colours::grey);
 }
 
-void JFEditor::resized()
+void PluginEditor::resized()
 {
     buttonAB.setBounds(margin + 4,
                        margin + 4,
@@ -115,28 +115,28 @@ void JFEditor::resized()
 }
 
 //==============================================================================
-void JFEditor::buttonClicked (Button* clickedButton)
+void PluginEditor::buttonClicked (Button* clickedButton)
 {
     if (clickedButton == &buttonAB) processor.toggleABState();
     if (clickedButton == &buttonCopyAB) processor.copyABState();
 }
 
 //==============================================================================
-void JFEditor::sliderValueChanged (Slider* movedSlider)
+void PluginEditor::sliderValueChanged (Slider* movedSlider)
 {
     jassert (movedSlider);
     setProcParamFromSlider (*movedSlider);
 }
 
 //==============================================================================
-void JFEditor::timerCallback()
+void PluginEditor::timerCallback()
 {
     processor.updateStepSlaveRanges();
     updateSlidersFromProcParams();
 }
 
 //==============================================================================
-void JFEditor::setProcParamFromSlider (const Slider& slider) const
+void PluginEditor::setProcParamFromSlider (const Slider& slider) const
 {
     int i = sliders.indexOf (&slider);
     const float sliderVal = (float) slider.getValue();
@@ -145,7 +145,7 @@ void JFEditor::setProcParamFromSlider (const Slider& slider) const
 }
 
 //==============================================================================
-void JFEditor::updateSlidersFromProcParams()
+void PluginEditor::updateSlidersFromProcParams()
 {
     for (int i = 0; i < processor.numParams(); ++i) {
         const auto& p = processor.getParam(i);
@@ -163,10 +163,10 @@ void JFEditor::updateSlidersFromProcParams()
 //==============================================================================
 // Non-member helpers
 //==============================================================================
-void printSlidersParams(const JFProcessor& processor,
+void printSlidersParams(const PluginProcessor& processor,
                         const OwnedArray<Slider>& sliders)
 {
-    std::ostringstream message;
+    String message;
 
     for (int i = 0; i < processor.numParams(); ++i) {
         jassert (i < sliders.size());
@@ -175,5 +175,5 @@ void printSlidersParams(const JFProcessor& processor,
                 << " params["<<i<<"] " << processor.getParam(i).get() << "\n";
     }
 
-    Logger::outputDebugString ((String) message.str());
+    Logger::outputDebugString (message);
 }

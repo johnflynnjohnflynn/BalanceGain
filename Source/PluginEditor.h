@@ -11,9 +11,8 @@
 #ifndef PLUGINEDITOR_H_INCLUDED
 #define PLUGINEDITOR_H_INCLUDED
 
-#include <sstream>                              // for printing debug messages
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "JFProcessor.h"
+#include "PluginProcessor.h"
 
 
 //==============================================================================
@@ -24,14 +23,14 @@
     - Generates controls automatically from parameters in plugin processor
     - A/B comparisons
 */
-class JFEditor  : public AudioProcessorEditor,
+class PluginEditor  : public AudioProcessorEditor,
                   public Button::Listener,
                   public Slider::Listener,
                   private Timer
 {
 public:
-    JFEditor (JFProcessor&);
-    ~JFEditor();
+    PluginEditor (PluginProcessor&);
+    ~PluginEditor();
 
     //==============================================================================
     void paint (Graphics&) override;
@@ -62,16 +61,16 @@ private:
         buttonCopyABWidth = int (widthComponent * 0.25 - unit),
     };
 
-    JFProcessor& processor;
+    PluginProcessor& processor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JFEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginEditor)
 };
 
 
 //==============================================================================
 // Non-member helpers
 //==============================================================================
-void printSlidersParams(const JFProcessor& processor,
+void printSlidersParams(const PluginProcessor& processor,
                         const OwnedArray<Slider>& sliders);
 
 

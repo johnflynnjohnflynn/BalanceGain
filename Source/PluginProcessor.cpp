@@ -8,12 +8,12 @@
   ==============================================================================
 */
 
-#include "JFProcessor.h"
-#include "JFEditor.h"
+#include "PluginProcessor.h"
+#include "PluginEditor.h"
 
 
 //==============================================================================
-JFProcessor::JFProcessor()
+PluginProcessor::PluginProcessor()
 {
                     // Add parameters here and in header enum
                     // (No spaces in name for XML)    name       min    max   default  stepSize  stepMaster/Slave
@@ -38,13 +38,13 @@ JFProcessor::JFProcessor()
     copyABState();
 }
 
-JFProcessor::~JFProcessor()
+PluginProcessor::~PluginProcessor()
 {
     // parameter deletes handled by processor OwnedArray
 }
 
 //==============================================================================
-bool JFProcessor::acceptsMidi() const
+bool PluginProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -53,7 +53,7 @@ bool JFProcessor::acceptsMidi() const
    #endif
 }
 
-bool JFProcessor::producesMidi() const
+bool PluginProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -63,16 +63,16 @@ bool JFProcessor::producesMidi() const
 }
 
 //==============================================================================
-void JFProcessor::prepareToPlay (double /*sampleRate*/, int /*samplesPerBlock*/)
+void PluginProcessor::prepareToPlay (double /*sampleRate*/, int /*samplesPerBlock*/)
 {
 }
 
-void JFProcessor::releaseResources()
+void PluginProcessor::releaseResources()
 {
 }
 
 template <typename FloatType> // float or double precision
-void JFProcessor::process (AudioBuffer<FloatType>& buffer, MidiBuffer& /*midiMessages*/)
+void PluginProcessor::process (AudioBuffer<FloatType>& buffer, MidiBuffer& /*midiMessages*/)
 {
     for (int i = getTotalNumInputChannels(); i < getTotalNumOutputChannels(); ++i)
         buffer.clear (i, 0, buffer.getNumSamples());    // clear junk channels
@@ -92,14 +92,14 @@ void JFProcessor::process (AudioBuffer<FloatType>& buffer, MidiBuffer& /*midiMes
 }
 
 //==============================================================================
-AudioProcessorEditor* JFProcessor::createEditor()
+AudioProcessorEditor* PluginProcessor::createEditor()
 {
-    return new JFEditor (*this);
+    return new PluginEditor (*this);
 }
 
 //==============================================================================
 // Copy plugin state to memory
-void JFProcessor::getStateInformation (MemoryBlock& destData)
+void PluginProcessor::getStateInformation (MemoryBlock& destData)
 {
     XmlElement xml ("MYPLUGINSETTINGS");
 
@@ -108,7 +108,7 @@ void JFProcessor::getStateInformation (MemoryBlock& destData)
 }
 
 // Get plugin state from memory
-void JFProcessor::setStateInformation (const void* data, int sizeInBytes)
+void PluginProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
 
@@ -120,11 +120,11 @@ void JFProcessor::setStateInformation (const void* data, int sizeInBytes)
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new JFProcessor();
+    return new PluginProcessor();
 }
 
 //==============================================================================
-const AudioParameterFloatStepped& JFProcessor::getParam (int index) const
+const AudioParameterFloatStepped& PluginProcessor::getParam (int index) const
 {
     jassert (indexInVector (index, params));
     jassert (params[index]);
@@ -133,7 +133,7 @@ const AudioParameterFloatStepped& JFProcessor::getParam (int index) const
 }
 
 //==============================================================================
-void JFProcessor::setParam (int index, float newValue)
+void PluginProcessor::setParam (int index, float newValue)
 {
     jassert (indexInVector (index, params));
     jassert (valueInParamRange (newValue, getParam(index)));
@@ -144,7 +144,7 @@ void JFProcessor::setParam (int index, float newValue)
 }
 
 //==============================================================================
-void JFProcessor::updateStepSlaveRanges()
+void PluginProcessor::updateStepSlaveRanges()
 {
     if (stepMaster) {
         const float newStepSize = stepMaster->get();
@@ -161,19 +161,19 @@ void JFProcessor::updateStepSlaveRanges()
 }
 
 //==============================================================================
-void JFProcessor::setParamRange (int index, float min, float max, float step)
+void PluginProcessor::setParamRange (int index, float min, float max, float step)
 {
     jassert (params[index]);
     params[index]->setRange (min, max, step);
 }
 
 //==============================================================================
-void JFProcessor::copyABState()
+void PluginProcessor::copyABState()
 {
     writeParamsToXml (xmlABState);
 }
 
-void JFProcessor::toggleABState()
+void PluginProcessor::toggleABState()
 {
     XmlElement tempState = XmlElement ("TEMP");
 
@@ -188,7 +188,7 @@ void JFProcessor::toggleABState()
 }
 
 //==============================================================================
-void JFProcessor::writeParamsToXml (XmlElement& xml)
+void PluginProcessor::writeParamsToXml (XmlElement& xml)
 {
     for (int i = 0; i < numParams(); ++i) {
         const float min   = getParam(i).range.start;
@@ -203,7 +203,7 @@ void JFProcessor::writeParamsToXml (XmlElement& xml)
 }
 
 //==============================================================================
-void JFProcessor::setParamsFromXml (const XmlElement& xml)
+void PluginProcessor::setParamsFromXml (const XmlElement& xml)
 {
     for (int i = 0; i < numParams(); ++i) {
         const float min   = float (xml.getDoubleAttribute (getParam(i).paramID+"min"));
@@ -235,9 +235,9 @@ bool valueInParamRange (float testValue, const AudioParameterFloatStepped& param
 }
 
 //==============================================================================
-void printParams(const JFProcessor& processor)
+void printParams(const PluginProcessor& processor)
 {
-    std::ostringstream message;
+    String message;
 
     for (int i = 0; i < processor.numParams(); ++i) {
         message << "params_["<<i<<"]="
@@ -247,5 +247,5 @@ void printParams(const JFProcessor& processor)
                 << processor.getParam(i).range.interval << "\n";
     }
 
-    Logger::outputDebugString ((String) message.str());
+    Logger::outputDebugString (message);
 }

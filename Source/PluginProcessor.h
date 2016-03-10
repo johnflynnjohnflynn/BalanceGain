@@ -11,7 +11,6 @@
 #ifndef PLUGINPROCESSOR_H_INCLUDED
 #define PLUGINPROCESSOR_H_INCLUDED
 
-#include <sstream>                              // for printing debug messages
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AudioParameterFloatStepped.h"
 
@@ -28,12 +27,12 @@
     - A/B compare function
 
 */
-class JFProcessor  : public AudioProcessor
+class PluginProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    JFProcessor();
-    ~JFProcessor();
+    PluginProcessor();
+    ~PluginProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -116,7 +115,7 @@ private:
     };
 
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JFProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginProcessor)
 };
 
 
@@ -127,7 +126,7 @@ template <typename Element>
 bool indexInVector (int index, const std::vector<Element>& container);
 
 bool valueInParamRange (float testValue, const AudioParameterFloatStepped& param);
-void printParams(const JFProcessor& processor);
+void printParams(const PluginProcessor& processor);
 
 
 #endif  // PLUGINPROCESSOR_H_INCLUDED
