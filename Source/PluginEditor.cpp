@@ -29,7 +29,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     addAndMakeVisible (buttonCopyAB);
     buttonCopyAB.addListener (this);
 
-    addAndMakeVisible (knob);
+    addAndMakeVisible (filmstripKnob);
 
     // Add GUI slider/label for every AudioProcessorParameter
     for (int i = 0; i < processor.numParams(); ++i)
@@ -67,11 +67,11 @@ PluginEditor::PluginEditor (PluginProcessor& p)
 
     updateSlidersFromProcParams();  // set slider values and ranges
 
-    const int numRows = sliders.size();
+    /*const int numRows = sliders.size();
     const int height = margin
                      + heightButtonsAB
                      + numRows * 2 * heightComponent
-                     + margin / 2;
+                     + margin / 2;*/
     setSize (width, 600);        // must be set before xtor finished
 
     startTimerHz (30);
@@ -84,7 +84,8 @@ PluginEditor::~PluginEditor()
 //==============================================================================
 void PluginEditor::paint (Graphics& g)
 {
-    g.fillAll (Colours::grey);
+    //g.fillAll (Colours::grey);
+    g.drawImage(bgTexture, 0, 0, 640, 400, 0, 0, 1280, 800);
 }
 
 void PluginEditor::resized()
@@ -98,7 +99,7 @@ void PluginEditor::resized()
                            buttonCopyABWidth - 4,
                            heightComponent);
 
-    knob.setBounds (0, 100, 468, 468);
+    filmstripKnob.setBounds (0, 150, 234, 234);
 
     for (int i = 0; i < sliders.size(); ++i)
     {
