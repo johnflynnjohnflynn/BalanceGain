@@ -99,7 +99,7 @@ private:
 
     AudioParameterFloatStepped* stepMaster {nullptr};   // Keep pointer to stepMaster
 
-    XmlElement xmlABState {XmlElement ("MYABSETTINGS")};// A/B state holder
+    XmlElement xmlABState {"MYABSETTINGS"};// A/B state holder
     
     template <typename FloatType>                       // Double precision enabled
     void process (AudioBuffer<FloatType>& buffer,       // processBlock() template
