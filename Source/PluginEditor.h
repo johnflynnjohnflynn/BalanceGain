@@ -48,12 +48,11 @@ private:
 
     Image bgTexture {ImageCache::getFromMemory (BinaryData::brushmetalbigexporttinypng_png,
                                                 BinaryData::brushmetalbigexporttinypng_pngSize)};
-    Image knob      {ImageCache::getFromMemory (BinaryData::knob05LargeForegroundfs8_png,
-                                                BinaryData::knob05LargeForegroundfs8_pngSize)};
+    Image knob      {ImageCache::getFromMemory (BinaryData::knob05LargeForeground4fs8_png,
+                                                BinaryData::knob05LargeForeground4fs8_pngSize)};
     Image fsImage   {ImageCache::getFromMemory (BinaryData::knob05LargeMarkerTextureFilmstripfs8_png,
                                                 BinaryData::knob05LargeMarkerTextureFilmstripfs8_pngSize)};
 
-    //ImageComponent knobComp {"knobCompName"};
     FilmStrip filmstripKnob {fsImage, knob};
     
     void timerCallback() override;

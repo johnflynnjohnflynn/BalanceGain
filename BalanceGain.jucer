@@ -15,8 +15,8 @@
     <GROUP id="{FBC9BF48-88A1-85B2-ED6A-A0707F5A9A38}" name="Resources">
       <FILE id="dh53vz" name="brush-metal-big-export-tinypng.png" compile="0"
             resource="1" file="Resources/brush-metal-big-export-tinypng.png"/>
-      <FILE id="cXhsVn" name="knob05LargeForeground-fs8.png" compile="0"
-            resource="1" file="Resources/knob05LargeForeground-fs8.png"/>
+      <FILE id="rZ8euf" name="knob05LargeForeground4-fs8.png" compile="0"
+            resource="1" file="Resources/knob05LargeForeground4-fs8.png"/>
       <FILE id="h6QKoZ" name="knob05LargeMarkerTextureFilmstrip-fs8.png"
             compile="0" resource="1" file="Resources/knob05LargeMarkerTextureFilmstrip-fs8.png"/>
     </GROUP>
