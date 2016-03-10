@@ -67,11 +67,12 @@ private:
 };
 
 
-//==============================================================================
-// Non-member helpers
-//==============================================================================
+namespace NonMember // Some helper functions that don't need to be inside the processor
+{
+
 void printSlidersParams(const PluginProcessor& processor,
                         const OwnedArray<Slider>& sliders);
 
+}
 
 #endif  // PLUGINEDITOR_H_INCLUDED

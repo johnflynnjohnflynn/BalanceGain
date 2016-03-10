@@ -126,7 +126,7 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 //==============================================================================
 const AudioParameterFloatStepped& PluginProcessor::getParam (int index) const
 {
-    jassert (indexInVector (index, params));
+    jassert (NonMember::indexInVector (index, params));
     jassert (params[index]);
 
     return *params[index];
@@ -135,8 +135,8 @@ const AudioParameterFloatStepped& PluginProcessor::getParam (int index) const
 //==============================================================================
 void PluginProcessor::setParam (int index, float newValue)
 {
-    jassert (indexInVector (index, params));
-    jassert (valueInParamRange (newValue, getParam(index)));
+    jassert (NonMember::indexInVector (index, params));
+    jassert (NonMember::valueInParamRange (newValue, getParam(index)));
     const float sliderVal0to1 = getParam(index).range.convertTo0to1 (newValue);
 
     jassert (params[index]);
@@ -217,16 +217,15 @@ void PluginProcessor::setParamsFromXml (const XmlElement& xml)
 
 
 //==============================================================================
-// Non-member helpers                                                   // namespace?
 //==============================================================================
 template <typename Element>
-bool indexInVector (int index, const std::vector<Element>& container)
+bool NonMember::indexInVector (int index, const std::vector<Element>& container)
 {
     return (0 <= index && index < (int) container.size());
 }
 
 //==============================================================================
-bool valueInParamRange (float testValue, const AudioParameterFloatStepped& param)
+bool NonMember::valueInParamRange (float testValue, const AudioParameterFloatStepped& param)
 {
     const float min = param.range.start;
     const float max = param.range.end;
@@ -235,7 +234,7 @@ bool valueInParamRange (float testValue, const AudioParameterFloatStepped& param
 }
 
 //==============================================================================
-void printParams(const PluginProcessor& processor)
+void NonMember::printParams(const PluginProcessor& processor)
 {
     String message;
 

@@ -119,14 +119,15 @@ private:
 };
 
 
-//==============================================================================
-// Non-member helpers                                                   // namespace?
-//==============================================================================
+namespace NonMember // Some helper functions that don't need to be inside the processor
+{
+
 template <typename Element>
 bool indexInVector (int index, const std::vector<Element>& container);
 
 bool valueInParamRange (float testValue, const AudioParameterFloatStepped& param);
 void printParams(const PluginProcessor& processor);
 
+} // namespace NonMember
 
 #endif  // PLUGINPROCESSOR_H_INCLUDED

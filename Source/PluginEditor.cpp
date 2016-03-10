@@ -161,9 +161,8 @@ void PluginEditor::updateSlidersFromProcParams()
 
 
 //==============================================================================
-// Non-member helpers
 //==============================================================================
-void printSlidersParams(const PluginProcessor& processor,
+void NonMember::printSlidersParams(const PluginProcessor& processor,
                         const OwnedArray<Slider>& sliders)
 {
     String message;
