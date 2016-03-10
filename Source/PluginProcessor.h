@@ -86,9 +86,8 @@ public:
 
 private:
     enum ParameterNames {                               // List symbolic names here
-        bypass,                                         // (for parameter indices
-        stepSize,                                       // in process())
-        gain
+        stepSize,                                       // (for parameter indices
+        gain,                                           // in process())
     };
 
     std::vector<AudioParameterFloatStepped*> params;    // (Eliminate downcasting by

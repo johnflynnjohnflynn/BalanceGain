@@ -17,7 +17,6 @@ PluginProcessor::PluginProcessor()
 {
                     // Add parameters here and in header enum
                     // (No spaces in name for XML)    name       min    max   default  stepSize  stepMaster/Slave
-    params.push_back (new AudioParameterFloatStepped ("Bypass",  0.0f , 1.0f,    0.0f,   1.0f));
     params.push_back (new AudioParameterFloatStepped ("StepSize",0.01f, 3.0f, 0.1875f,   0.0f, AudioParameterFloatStepped::stepMaster));
     params.push_back (new AudioParameterFloatStepped ("Gain",   -12.0f,12.0f,    0.0f,   0.0f, AudioParameterFloatStepped::stepSlave));
 
@@ -77,18 +76,12 @@ void PluginProcessor::process (AudioBuffer<FloatType>& buffer, MidiBuffer& /*mid
     for (int i = getTotalNumInputChannels(); i < getTotalNumOutputChannels(); ++i)
         buffer.clear (i, 0, buffer.getNumSamples());    // clear junk channels
 
-    const float byp = getParam(bypass).get();
-
-    if (byp < 0.5f) {
-        // per-block basis gain (fine for stepped control)
-        const float gndB = getParam(gain).get();
-        const float gnLin = Decibels::decibelsToGain (gndB);
-        
-        for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
-            buffer.applyGain (channel, 0, buffer.getNumSamples(), gnLin);
-    } else {
-        // bypass (do nothing)
-    }
+    // per-block basis gain (fine for stepped control)
+    const float gndB = getParam(gain).get();
+    const float gnLin = Decibels::decibelsToGain (gndB);
+    
+    for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
+        buffer.applyGain (channel, 0, buffer.getNumSamples(), gnLin);
 }
 
 //==============================================================================
