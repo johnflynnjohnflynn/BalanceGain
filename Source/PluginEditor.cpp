@@ -29,6 +29,8 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     addAndMakeVisible (buttonCopyAB);
     buttonCopyAB.addListener (this);
 
+    addAndMakeVisible (knob);
+
     // Add GUI slider/label for every AudioProcessorParameter
     for (int i = 0; i < processor.numParams(); ++i)
     {
@@ -70,7 +72,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
                      + heightButtonsAB
                      + numRows * 2 * heightComponent
                      + margin / 2;
-    setSize (width, height);        // must be set before xtor finished
+    setSize (width, 600);        // must be set before xtor finished
 
     startTimerHz (30);
 }
@@ -95,6 +97,8 @@ void PluginEditor::resized()
                            margin + 4,
                            buttonCopyABWidth - 4,
                            heightComponent);
+
+    knob.setBounds (0, 100, 468, 468);
 
     for (int i = 0; i < sliders.size(); ++i)
     {

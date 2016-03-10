@@ -31,7 +31,7 @@ public:
           filmStrip_ {image},
           height_    {filmStrip_.getHeight()},
           width_     {filmStrip_.getWidth()},
-          numFrames_ {height_ / width_}
+          numFrames_ {height_ / width_ - 1}
     {
         jassert (height_ > width_);
         jassert (numFrames_ > 0);
@@ -42,6 +42,11 @@ public:
         setColour (Slider::textBoxBackgroundColourId, Colour (0x10000000));
         setColour (Slider::textBoxOutlineColourId, Colour (0x00000000));
         setSliderStyle (RotaryHorizontalVerticalDrag);
+
+        Logger::outputDebugString ((String) height_);
+        Logger::outputDebugString ((String) width_);
+        Logger::outputDebugString ((String) numFrames_);
+
     }
     
     void paint(Graphics& g)
@@ -54,11 +59,15 @@ public:
                      0,
                      0,
                      width_,
-                     height_,
+                     width_, // frame height (assumes square frame)
                      0,
-                     imagePositionRatio * height_,
+                     imagePositionRatio * width_,
                      width_,
-                     height_);
+                     width_);
+
+        if (isMouseOverOrDragging())
+        {
+        }
     }
     
 private:

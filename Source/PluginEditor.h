@@ -45,6 +45,10 @@ private:
     TextButton buttonCopyAB;
     OwnedArray<Slider> sliders;
     OwnedArray<Label> labels;
+
+    Image image {ImageCache::getFromMemory (BinaryData::knob05LargeMarkerTextureFilmstripfs8_png,
+                                            BinaryData::knob05LargeMarkerTextureFilmstripfs8_pngSize)};
+    FilmStrip knob {image};
     
     void timerCallback() override;
 
