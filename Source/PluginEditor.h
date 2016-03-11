@@ -64,8 +64,9 @@ private:
         widthComponent = width - margin * 2,
         heightComponent = 3 * unit,
         heightButtonsAB = 5 * unit - 2,
-        buttonABWidth = int (widthComponent * 0.75 - unit),
-        buttonCopyABWidth = int (widthComponent * 0.25 - unit),
+        buttonABWidth = 100,
+        buttonCopyABWidth = 50,
+        utilityBarHeight = 20,
     };
 
     PluginProcessor& processor;

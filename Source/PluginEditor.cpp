@@ -96,14 +96,14 @@ void PluginEditor::paint (Graphics& g)
 
 void PluginEditor::resized()
 {
-    buttonAB.setBounds(margin + 4,
-                       margin + 4,
+    buttonAB.setBounds(4,
+                       4,
                        buttonABWidth,
-                       heightComponent);
-    buttonCopyAB.setBounds(margin + buttonABWidth + margin,
-                           margin + 4,
-                           buttonCopyABWidth - 4,
-                           heightComponent);
+                       utilityBarHeight);
+    buttonCopyAB.setBounds(buttonABWidth + 8,
+                           4,
+                           buttonCopyABWidth,
+                           utilityBarHeight);
 
     knob.setBounds (0, 150, knob.getSize() / 2, knob.getSize() / 2); // halved for retina
 
