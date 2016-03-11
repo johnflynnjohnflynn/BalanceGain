@@ -17,6 +17,13 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     : AudioProcessorEditor (&p),
       buttonAB ("A-B"),
       buttonCopyAB ("Copy"),
+      metalBackground {ImageCache::getFromMemory (BinaryData::brushmetalbigexporttinypng_png,
+                                                  BinaryData::brushmetalbigexporttinypng_pngSize)},
+      knobStyleImage  {ImageCache::getFromMemory (BinaryData::knob05LargeForeground4fs8_png,
+                                                  BinaryData::knob05LargeForeground4fs8_pngSize)},
+      filmstripImage  {ImageCache::getFromMemory (BinaryData::knob05LargeMarkerTextureFilmstripfs8_png,
+                                                  BinaryData::knob05LargeMarkerTextureFilmstripfs8_pngSize)},
+      knob {filmstripImage, knobStyleImage},
       processor (p)
 {
     buttonAB.setColour (TextButton::textColourOffId, Colour (0xff404040));
@@ -28,8 +35,6 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     buttonCopyAB.setColour (TextButton::buttonColourId, Colour (0xffa0a0a0));
     addAndMakeVisible (buttonCopyAB);
     buttonCopyAB.addListener (this);
-
-    addAndMakeVisible (filmstripKnob);
 
     // Add GUI slider/label for every AudioProcessorParameter
     for (int i = 0; i < processor.numParams(); ++i)
@@ -65,6 +70,8 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     }
     jassert (sliders.size() == labels.size());
 
+    addAndMakeVisible (knob);
+
     updateSlidersFromProcParams();  // set slider values and ranges
 
     /*const int numRows = sliders.size();
@@ -72,7 +79,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
                      + heightButtonsAB
                      + numRows * 2 * heightComponent
                      + margin / 2;*/
-    setSize (width, 600);        // must be set before xtor finished
+    setSize (width, 400);        // must be set before xtor finished
 
     startTimerHz (30);
 }
@@ -84,8 +91,7 @@ PluginEditor::~PluginEditor()
 //==============================================================================
 void PluginEditor::paint (Graphics& g)
 {
-    //g.fillAll (Colours::grey);
-    g.drawImage(bgTexture, 0, 0, 640, 400, 0, 0, 1280, 800);
+    g.drawImage(metalBackground, 0, 0, 640, 400, 0, 0, 1280, 800);
 }
 
 void PluginEditor::resized()
@@ -99,7 +105,7 @@ void PluginEditor::resized()
                            buttonCopyABWidth - 4,
                            heightComponent);
 
-    filmstripKnob.setBounds (0, 150, 234, 234);
+    knob.setBounds (0, 150, knob.getSize() / 2, knob.getSize() / 2); // halved for retina
 
     for (int i = 0; i < sliders.size(); ++i)
     {

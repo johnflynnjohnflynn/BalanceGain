@@ -25,19 +25,19 @@
       shadows, bevels and layer styles etc.)
 
 */
-class FilmStrip  : public Slider
+class FilmStrip  : public Slider                                        // rename to knob?
 {
 public:
     FilmStrip (Image filmStripImage, Image topLayerImage)
         : Slider {},
-          filmStrip_ {filmStripImage},
-          topLayer_  {topLayerImage},
-          filmStripHeight_ {filmStrip_.getHeight()},
-          width_           {filmStrip_.getWidth()},
-          numFrames_       {filmStripHeight_ / width_}
+          filmStrip {filmStripImage},
+          topLayer  {topLayerImage},
+          filmStripHeight {filmStrip.getHeight()},
+          width           {filmStrip.getWidth()},
+          numFrames       {filmStripHeight / width}
     {
-        jassert (filmStripHeight_ > width_);
-        jassert (numFrames_ > 0);
+        jassert (filmStripHeight > width);
+        jassert (numFrames > 0);
 
         //setTextBoxStyle (NoTextBox, 0, 0, 0);
         setTextBoxStyle (TextBoxBelow, false, 80, 15);
@@ -46,9 +46,9 @@ public:
         setColour (Slider::textBoxOutlineColourId, Colour (0x00000000));
         setSliderStyle (RotaryHorizontalVerticalDrag);
 
-        Logger::outputDebugString ((String) filmStripHeight_);
-        Logger::outputDebugString ((String) width_);
-        Logger::outputDebugString ((String) numFrames_);
+        Logger::outputDebugString ((String) filmStripHeight);
+        Logger::outputDebugString ((String) width);
+        Logger::outputDebugString ((String) numFrames);
 
     }
     
@@ -56,34 +56,34 @@ public:
     {
         const float sliderPosition = static_cast<float> (valueToProportionOfLength (getValue()));
 
-        int imagePositionRatio = sliderPosition * (numFrames_ - 1);
+        int imagePositionRatio = sliderPosition * (numFrames - 1);
 
-        g.drawImage (filmStrip_,
-                     0,
-                     0,
+        g.drawImage (filmStrip,                    // Draw filmstrip then draw
+                     0,                             // 'topLayer' image (should have
+                     0,                             // transparancies) above.
                      getSize() / 2,
                      getSize() / 2,
                      0,
-                     imagePositionRatio * width_,
+                     imagePositionRatio * width,
                      getSize(),
                      getSize());
 
-        g.drawImage (topLayer_, 0, 0, getSize() / 2, getSize() / 2, 0, 0, getSize(), getSize());
+        g.drawImage (topLayer, 0, 0, getSize() / 2, getSize() / 2, 0, 0, getSize(), getSize());
 
         if (isMouseOverOrDragging())
         {
         }
     }
 
-    int getSize() { return width_; } // return vertical/horizontal dimension of our
-                                     // square component
+    int getSize() { return width; } // return vertical/horizontal dimension of our
+                                     // square component.
     
 private:
-    const Image filmStrip_;
-    const Image topLayer_;
-    const int filmStripHeight_;
-    const int width_;
-    const int numFrames_;
+    const Image filmStrip;
+    const Image topLayer;
+    const int filmStripHeight;
+    const int width;
+    const int numFrames;
 };
 
 

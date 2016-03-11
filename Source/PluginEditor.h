@@ -46,14 +46,11 @@ private:
     OwnedArray<Slider> sliders;
     OwnedArray<Label> labels;
 
-    Image bgTexture {ImageCache::getFromMemory (BinaryData::brushmetalbigexporttinypng_png,
-                                                BinaryData::brushmetalbigexporttinypng_pngSize)};
-    Image knob      {ImageCache::getFromMemory (BinaryData::knob05LargeForeground4fs8_png,
-                                                BinaryData::knob05LargeForeground4fs8_pngSize)};
-    Image fsImage   {ImageCache::getFromMemory (BinaryData::knob05LargeMarkerTextureFilmstripfs8_png,
-                                                BinaryData::knob05LargeMarkerTextureFilmstripfs8_pngSize)};
+    Image metalBackground;
+    Image knobStyleImage;
+    Image filmstripImage;
 
-    FilmStrip filmstripKnob {fsImage, knob};
+    FilmStrip knob;
     
     void timerCallback() override;
 
