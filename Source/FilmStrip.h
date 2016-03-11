@@ -41,15 +41,17 @@ public:
 
         //setTextBoxStyle (NoTextBox, 0, 0, 0);
         setTextBoxStyle (TextBoxBelow, false, 80, 15);
-        setColour (Slider::textBoxTextColourId, Colour (0xff404040));
-        setColour (Slider::textBoxBackgroundColourId, Colour (0x10000000));
-        setColour (Slider::textBoxOutlineColourId, Colour (0x00000000));
+        //setColour (Slider::backgroundColourId,        Colour (0x00000000));
+
+        setColour (Slider::textBoxTextColourId,       Colour (0xff606060));
+        setColour (Slider::textBoxBackgroundColourId, Colour (0x80c0c0c0));
+        setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
+        setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));
         setSliderStyle (RotaryHorizontalVerticalDrag);
 
-        Logger::outputDebugString ((String) filmStripHeight);
-        Logger::outputDebugString ((String) width);
-        Logger::outputDebugString ((String) numFrames);
+        // outlineWhenEditingColourId but how to set?
 
+        // LookAndFeel_V3 laf;
     }
     
     void paint(Graphics& g)
