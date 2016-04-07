@@ -58,7 +58,7 @@ public:
     {
         const float sliderPosition = static_cast<float> (valueToProportionOfLength (getValue()));
 
-        int imagePositionRatio = sliderPosition * (numFrames - 1);
+        int imagePositionRatio = sliderPosition * (numFrames - 1);                      // int?!
 
         g.drawImage (filmStrip,                    // Draw filmstrip then draw
                      0,                             // 'topLayer' image (should have
