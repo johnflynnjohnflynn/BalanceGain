@@ -61,7 +61,7 @@ public:
 
         int imagePositionRatio = sliderPosition0to1 * (numFrames - 1);                          // int?!
 
-        const float rotateAmount = 0.05235987756 * static_cast<int> (sliderPosition0to1 * 89);  //  Magic X2! 3 degrees in radians
+        const float rotateAmount = 0.05235987756 * static_cast<int> (sliderPosition0to1 * (numFrames - 1));  //  Magic X2! 3 degrees in radians
 
         Logger::outputDebugString((String) sliderPosition0to1);
         Logger::outputDebugString((String) rotateAmount);
