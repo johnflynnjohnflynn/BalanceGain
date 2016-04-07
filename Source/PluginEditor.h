@@ -57,7 +57,7 @@ private:
     void setProcParamFromSlider (const Slider& slider) const;
     void updateSlidersFromProcParams();
     
-    enum relativeLayout {                   // Measurements for relative layout
+    /*enum relativeLayout {                   // Measurements for relative layout
         unit = 8,
         width = 64 * unit,
         margin = 2 * unit,
@@ -67,7 +67,7 @@ private:
         buttonABWidth = 100,
         buttonCopyABWidth = 50,
         utilityBarHeight = 20,
-    };
+    };*/
 
     PluginProcessor& processor;
 

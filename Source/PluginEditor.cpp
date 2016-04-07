@@ -36,6 +36,23 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     addAndMakeVisible (buttonCopyAB);
     buttonCopyAB.addListener (this);
 
+    // const AudioParameterFloatStepped& param = processor.getParam(0);            // magic! 0
+    Slider* stepSizeSlider = new Slider (processor.getParam(0).name);           // magic! 0
+    jassert (stepSizeSlider);
+    sliders.add (stepSizeSlider);
+
+    addAndMakeVisible (stepSizeSlider);
+    stepSizeSlider->addListener (this);
+
+    Slider* gainSlider = new Slider (processor.getParam(1).name);           // magic! 1
+    jassert (gainSlider);
+    sliders.add (gainSlider);
+
+    addAndMakeVisible (gainSlider);
+    gainSlider->addListener (this);
+
+
+/*
     // Add GUI slider/label for every AudioProcessorParameter
     for (int i = 0; i < processor.numParams(); ++i)
     {
@@ -69,6 +86,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
         addAndMakeVisible (aLabel);
     }
     jassert (sliders.size() == labels.size());
+*/
 
     addAndMakeVisible (knob);
 
@@ -79,7 +97,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
                      + heightButtonsAB
                      + numRows * 2 * heightComponent
                      + margin / 2;*/
-    setSize (width, 400);        // must be set before xtor finished
+    setSize (600, 400);        // must be set before xtor finished                  // magic
 
     startTimerHz (30);
 }
@@ -91,23 +109,19 @@ PluginEditor::~PluginEditor()
 //==============================================================================
 void PluginEditor::paint (Graphics& g)
 {
-    g.drawImage(metalBackground, 0, 0, 640, 400, 0, 0, 1280, 800);
+    g.drawImage(metalBackground, 0, 0, 640, 400, 0, 0, 1280, 800);                      // magic
 }
 
 void PluginEditor::resized()
 {
-    buttonAB.setBounds(4,
-                       4,
-                       buttonABWidth,
-                       utilityBarHeight);
-    buttonCopyAB.setBounds(buttonABWidth + 8,
-                           4,
-                           buttonCopyABWidth,
-                           utilityBarHeight);
+    buttonAB    .setBounds (  4,  4, 60, 20);                                           // magic!
+    buttonCopyAB.setBounds ( 64,  4, 60, 20);
+    sliders[0] ->setBounds (128,  4, 60, 20);
+    sliders[1] ->setBounds (128, 40, 60, 20);
 
     knob.setBounds (0, 150, knob.getSize() / 2, knob.getSize() / 2); // halved for retina
 
-    for (int i = 0; i < sliders.size(); ++i)
+    /*for (int i = 0; i < sliders.size(); ++i)
     {
         jassert (sliders[i]);
         sliders[i]->setBounds(margin,
@@ -122,7 +136,7 @@ void PluginEditor::resized()
                               margin + heightButtonsAB + i * 2 * heightComponent,
                               widthComponent,
                               heightComponent);
-    }
+    }*/
 }
 
 //==============================================================================
