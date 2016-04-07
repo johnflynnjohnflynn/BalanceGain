@@ -28,16 +28,17 @@
 class FilmStrip  : public Slider                                        // rename to knob?
 {
 public:
-    FilmStrip (Image filmStripImage, Image topLayerImage)
+    FilmStrip (Image filmStripImage, Image topLayerImage, Image rotatingTextureImage)
         : Slider {},
           filmStrip {filmStripImage},
           topLayer  {topLayerImage},
+          rotatingTexture {rotatingTextureImage},
           filmStripHeight {filmStrip.getHeight()},
           width           {filmStrip.getWidth()},
           numFrames       {filmStripHeight / width}
     {
         jassert (filmStripHeight > width);
-        jassert (numFrames > 0);
+        jassert (numFrames > 1);
 
         //setTextBoxStyle (NoTextBox, 0, 0, 0);
         setTextBoxStyle (TextBoxBelow, false, 80, 15);
@@ -56,11 +57,22 @@ public:
     
     void paint(Graphics& g)
     {
-        const float sliderPosition = static_cast<float> (valueToProportionOfLength (getValue()));
+        const float sliderPosition0to1 = static_cast<float> (valueToProportionOfLength (getValue()));
 
-        int imagePositionRatio = sliderPosition * (numFrames - 1);                      // int?!
+        int imagePositionRatio = sliderPosition0to1 * (numFrames - 1);                          // int?!
 
-        g.drawImage (filmStrip,                    // Draw filmstrip then draw
+        const float rotateAmount = 0.05235987756 * static_cast<int> (sliderPosition0to1 * 89);  //  Magic X2! 3 degrees in radians
+
+        Logger::outputDebugString((String) sliderPosition0to1);
+        Logger::outputDebugString((String) rotateAmount);
+
+        AffineTransform rotationTransform;
+        rotationTransform = rotationTransform.rotated (rotateAmount, getSize() / 2, getSize() / 2);
+        rotationTransform = rotationTransform.scaled (0.5, 0.5);
+
+        g.drawImageTransformed (rotatingTexture, rotationTransform);
+
+        g.drawImage (filmStrip,                     // Draw filmstrip then draw
                      0,                             // 'topLayer' image (should have
                      0,                             // transparancies) above.
                      getSize() / 2,
@@ -83,6 +95,7 @@ public:
 private:
     const Image filmStrip;
     const Image topLayer;
+    const Image rotatingTexture;
     const int filmStripHeight;
     const int width;
     const int numFrames;

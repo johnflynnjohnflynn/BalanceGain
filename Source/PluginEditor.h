@@ -48,6 +48,7 @@ private:
 
     Image metalBackground;
     Image knobStyleImage;
+    Image knobTexture;
     Image filmstripImage;
 
     FilmStrip knob;

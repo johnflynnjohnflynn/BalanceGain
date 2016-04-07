@@ -21,9 +21,11 @@ PluginEditor::PluginEditor (PluginProcessor& p)
                                                   BinaryData::brushmetalbigexporttinypng_pngSize)},
       knobStyleImage  {ImageCache::getFromMemory (BinaryData::knob05LargeForeground4fs8_png,
                                                   BinaryData::knob05LargeForeground4fs8_pngSize)},
+      knobTexture     {ImageCache::getFromMemory (BinaryData::knob05LargeTextureOnlyfs8_png,
+                                                  BinaryData::knob05LargeTextureOnlyfs8_pngSize)},
       filmstripImage  {ImageCache::getFromMemory (BinaryData::knob05LargeMarkerFilmstripfs8_png,
                                                   BinaryData::knob05LargeMarkerFilmstripfs8_pngSize)},
-      knob {filmstripImage, knobStyleImage},
+      knob {filmstripImage, knobStyleImage, knobTexture},
       processor (p)
 {
     buttonAB.setColour (TextButton::textColourOffId, Colour (0xff404040));
