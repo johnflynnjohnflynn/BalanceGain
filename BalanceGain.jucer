@@ -19,8 +19,8 @@
             resource="1" file="Resources/knob05LargeForeground4-fs8.png"/>
       <FILE id="GFCvjp" name="knob05LargeMarkerFilmstrip-fs8.png" compile="0"
             resource="1" file="Resources/knob05LargeMarkerFilmstrip-fs8.png"/>
-      <FILE id="FizzQ9" name="knob05LargeTextureOnly-fs8.png" compile="0"
-            resource="1" file="Resources/knob05LargeTextureOnly-fs8.png"/>
+      <FILE id="ZqELcM" name="knob05LargeTextureOnlyRotated-fs8.png" compile="0"
+            resource="1" file="Resources/knob05LargeTextureOnlyRotated-fs8.png"/>
     </GROUP>
     <GROUP id="{C87943A9-B21E-0755-8745-1BC3A4F4F041}" name="Source">
       <FILE id="DMi01l" name="FilmStrip.h" compile="0" resource="0" file="Source/FilmStrip.h"/>
