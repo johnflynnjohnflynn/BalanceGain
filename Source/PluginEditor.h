@@ -46,12 +46,12 @@ private:
     OwnedArray<Slider> sliders;
     OwnedArray<Label> labels;
 
-    Image metalBackground;
+    Image backgroundImage;
     Image knobStyleImage;
-    Image knobTexture;
+    //Image knobTexture;
     Image filmstripImage;
 
-    FilmStrip knob;
+    FilmStrip* knob;
     
     void timerCallback() override;
 

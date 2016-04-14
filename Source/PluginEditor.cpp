@@ -17,15 +17,14 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     : AudioProcessorEditor (&p),
       buttonAB ("A-B"),
       buttonCopyAB ("Copy"),
-      metalBackground {ImageCache::getFromMemory (BinaryData::brushmetalbigexporttinypng_png,
-                                                  BinaryData::brushmetalbigexporttinypng_pngSize)},
+      backgroundImage {ImageCache::getFromMemory (BinaryData::BalanceGain_01fs8_png,
+                                                  BinaryData::BalanceGain_01fs8_pngSize)},
       knobStyleImage  {ImageCache::getFromMemory (BinaryData::knob05LargeForeground4fs8_png,
                                                   BinaryData::knob05LargeForeground4fs8_pngSize)},
-      knobTexture     {ImageCache::getFromMemory (BinaryData::knob05LargeTextureOnlyRotatedfs8_png,
-                                                  BinaryData::knob05LargeTextureOnlyRotatedfs8_pngSize)},
+      //knobTexture     {ImageCache::getFromMemory (BinaryData::knob05LargeTextureOnlyRotatedfs8_png,
+        //                                          BinaryData::knob05LargeTextureOnlyRotatedfs8_pngSize)},
       filmstripImage  {ImageCache::getFromMemory (BinaryData::knob05LargeMarkerFilmstripfs8_png,
                                                   BinaryData::knob05LargeMarkerFilmstripfs8_pngSize)},
-      knob {filmstripImage, knobStyleImage, knobTexture},
       processor (p)
 {
     buttonAB.setColour (TextButton::textColourOffId, Colour (0xff404040));
@@ -38,19 +37,46 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     addAndMakeVisible (buttonCopyAB);
     buttonCopyAB.addListener (this);
 
-    Slider* stepSizeSlider = new Slider (processor.getParam(0).name);           // magic! 0
+    String stepSizeParamName = processor.getParam(0).name;                     // magic!
+
+    Slider* stepSizeSlider = new Slider (stepSizeParamName);
     jassert (stepSizeSlider);
     sliders.add (stepSizeSlider);
+
+    stepSizeSlider->setSliderStyle (Slider::LinearHorizontal);
+    /*stepSizeSlider->setTextBoxStyle (Slider::TextBoxRight,false,64,16);         // magic!
+    stepSizeSlider->setColour (Slider::thumbColourId, Colours::silver);
+    stepSizeSlider->setColour (Slider::textBoxTextColourId, Colour (0xff404040));
+    stepSizeSlider->setColour (Slider::textBoxBackgroundColourId, Colour (0xff909090));*/
 
     addAndMakeVisible (stepSizeSlider);
     stepSizeSlider->addListener (this);
 
+    Label* stepSizeLabel = new Label (stepSizeParamName, stepSizeParamName);
+    jassert (stepSizeLabel);
+    labels.add (stepSizeLabel);
+
+    stepSizeLabel->setJustificationType (Justification::centredLeft);
+    stepSizeLabel->setEditable (false, false, false);
+    stepSizeLabel->setColour (Label::textColourId, Colour (0xff404040));
+    stepSizeLabel->setColour (TextEditor::textColourId, Colours::black);
+    stepSizeLabel->setColour (TextEditor::backgroundColourId,Colour (0x00000000));
+
+    //addAndMakeVisible (stepSizeLabel);
+/*
     Slider* gainSlider = new Slider (processor.getParam(1).name);               // magic! 1
     jassert (gainSlider);
     sliders.add (gainSlider);
 
     addAndMakeVisible (gainSlider);
-    gainSlider->addListener (this);
+    gainSlider->addListener (this);*/
+
+    knob = new FilmStrip {filmstripImage, knobStyleImage};
+
+    sliders.add (knob);
+
+    addAndMakeVisible (knob);
+    knob->addListener (this);
 
 /*
     // Add GUI slider/label for every AudioProcessorParameter
@@ -88,8 +114,6 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     jassert (sliders.size() == labels.size());
 */
 
-    addAndMakeVisible (knob);
-
     updateSlidersFromProcParams();  // set slider values and ranges
 
     /*const int numRows = sliders.size();
@@ -97,7 +121,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
                      + heightButtonsAB
                      + numRows * 2 * heightComponent
                      + margin / 2;*/
-    setSize (600, 400);        // must be set before xtor finished                  // magic
+    setSize (400, 400);        // must be set before xtor finished                  // magic
 
     startTimerHz (30);
 }
@@ -109,18 +133,19 @@ PluginEditor::~PluginEditor()
 //==============================================================================
 void PluginEditor::paint (Graphics& g)
 {
-    g.fillAll (Colour (0xffd7d7d7));
-    g.drawImage (metalBackground, 0, 30, 640, 400, 0, 0, 1280, 800);                      // magic
+    g.fillAll (Colours::grey);
+    g.drawImage (backgroundImage, 0, 0, 400, 400, 0, 0, 800, 800);                      // magic
 }
 
 void PluginEditor::resized()
 {
-    buttonAB    .setBounds (  4,  4,  60, 20);                                           // magic!
-    buttonCopyAB.setBounds ( 64,  4,  60, 20);
-    sliders[0] ->setBounds (128,  4, 240, 20);
-    sliders[1] ->setBounds (128, 40, 240, 20);
+    buttonAB    .setBounds (  4,  5,  60, 20);                                           // magic!
+    buttonCopyAB.setBounds ( 65,  5,  60, 20);
+    sliders[0] ->setBounds (300,  4, 240, 20);
+    //sliders[1] ->setBounds (128, 40, 240, 20);
+    labels[0]  ->setBounds (200,  40, 240, 20);
 
-    knob.setBounds (0, 150, knob.getSize() / 2, knob.getSize() / 2); // halved for retina
+    knob->setBounds (83, 83, knob->getSize() / 2, knob->getSize() / 2); // halved for retina
 
     /*for (int i = 0; i < sliders.size(); ++i)
     {

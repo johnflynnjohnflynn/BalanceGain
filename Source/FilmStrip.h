@@ -28,11 +28,11 @@
 class FilmStrip  : public Slider                                        // rename to knob?
 {
 public:
-    FilmStrip (Image filmStripImage, Image topLayerImage, Image rotatingTextureImage)
+    FilmStrip (Image filmStripImage, Image topLayerImage)
         : Slider {},
           filmStrip {filmStripImage},
           topLayer  {topLayerImage},
-          rotatingTexture {rotatingTextureImage},
+          //rotatingTexture {rotatingTextureImage},
           filmStripHeight {filmStrip.getHeight()},
           width           {filmStrip.getWidth()},
           numFrames       {filmStripHeight / width}
@@ -70,7 +70,7 @@ public:
         rotationTransform = rotationTransform.rotated (rotateAmount, getSize() / 2, getSize() / 2);
         rotationTransform = rotationTransform.scaled (0.5, 0.5);
 
-        g.drawImageTransformed (rotatingTexture, rotationTransform);
+        //g.drawImageTransformed (rotatingTexture, rotationTransform);
 
         g.drawImage (filmStrip,                     // Draw filmstrip then draw
                      0,                             // 'topLayer' image (should have

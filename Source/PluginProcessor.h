@@ -91,7 +91,7 @@ private:
     };
 
     enum StepInfo {
-        stepsPerParam = 23, // odd number
+        stepsPerParam = 25, // odd number
         stepsPerSidePerParam = (stepsPerParam - 1) / 2
     };
 
