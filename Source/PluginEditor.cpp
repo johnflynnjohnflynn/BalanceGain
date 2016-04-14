@@ -23,17 +23,17 @@ PluginEditor::PluginEditor (PluginProcessor& p)
                                                   BinaryData::knob05LargeForeground4fs8_pngSize)},
       //knobTexture     {ImageCache::getFromMemory (BinaryData::knob05LargeTextureOnlyRotatedfs8_png,
         //                                          BinaryData::knob05LargeTextureOnlyRotatedfs8_pngSize)},
-      filmstripImage  {ImageCache::getFromMemory (BinaryData::knob05LargeMarkerFilmstripfs8_png,
-                                                  BinaryData::knob05LargeMarkerFilmstripfs8_pngSize)},
+      filmstripImage  {ImageCache::getFromMemory (BinaryData::markerFilmstripfs8_png,
+                                                  BinaryData::markerFilmstripfs8_pngSize)},
       processor (p)
 {
     buttonAB.setColour (TextButton::textColourOffId, Colour (0xff404040));
-    buttonAB.setColour (TextButton::buttonColourId, Colour (0xffa0a0a0));
+    buttonAB.setColour (TextButton::buttonColourId, Colour (0xff808080));
     addAndMakeVisible (buttonAB);
     buttonAB.addListener (this);
 
     buttonCopyAB.setColour (TextButton::textColourOffId, Colour (0xff404040));
-    buttonCopyAB.setColour (TextButton::buttonColourId, Colour (0xffa0a0a0));
+    buttonCopyAB.setColour (TextButton::buttonColourId, Colour (0xff808080));
     addAndMakeVisible (buttonCopyAB);
     buttonCopyAB.addListener (this);
 
@@ -44,10 +44,22 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     sliders.add (stepSizeSlider);
 
     stepSizeSlider->setSliderStyle (Slider::LinearHorizontal);
-    /*stepSizeSlider->setTextBoxStyle (Slider::TextBoxRight,false,64,16);         // magic!
-    stepSizeSlider->setColour (Slider::thumbColourId, Colours::silver);
+    stepSizeSlider->setTextBoxStyle (Slider::TextBoxLeft,false,60,15);         // magic!
+    stepSizeSlider->setColour (Slider::textBoxTextColourId,       Colour (0xff404040));
+    stepSizeSlider->setColour (Slider::textBoxBackgroundColourId, Colour (0xff707070));
+    stepSizeSlider->setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
+    stepSizeSlider->setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));
+    /*stepSizeSlider->setColour (Slider::thumbColourId, Colours::silver);
     stepSizeSlider->setColour (Slider::textBoxTextColourId, Colour (0xff404040));
-    stepSizeSlider->setColour (Slider::textBoxBackgroundColourId, Colour (0xff909090));*/
+    stepSizeSlider->setColour (Slider::textBoxBackgroundColourId, Colour (0xff909090));
+
+        setTextBoxStyle (TextBoxBelow, false, 80, 15);
+        //setColour (Slider::backgroundColourId,        Colour (0x00000000));
+
+        setColour (Slider::textBoxTextColourId,       Colour (0xff606060));
+        setColour (Slider::textBoxBackgroundColourId, Colour (0x80c0c0c0));
+        setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
+        setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));*/
 
     addAndMakeVisible (stepSizeSlider);
     stepSizeSlider->addListener (this);
@@ -58,11 +70,11 @@ PluginEditor::PluginEditor (PluginProcessor& p)
 
     stepSizeLabel->setJustificationType (Justification::centredLeft);
     stepSizeLabel->setEditable (false, false, false);
-    stepSizeLabel->setColour (Label::textColourId, Colour (0xff404040));
+    stepSizeLabel->setColour (Label::textColourId, Colour (0xff404040));/*
     stepSizeLabel->setColour (TextEditor::textColourId, Colours::black);
-    stepSizeLabel->setColour (TextEditor::backgroundColourId,Colour (0x00000000));
+    stepSizeLabel->setColour (TextEditor::backgroundColourId,Colour (0x00000000));*/
 
-    //addAndMakeVisible (stepSizeLabel);
+    addAndMakeVisible (stepSizeLabel);
 /*
     Slider* gainSlider = new Slider (processor.getParam(1).name);               // magic! 1
     jassert (gainSlider);
@@ -139,13 +151,12 @@ void PluginEditor::paint (Graphics& g)
 
 void PluginEditor::resized()
 {
-    buttonAB    .setBounds (  4,  5,  60, 20);                                           // magic!
-    buttonCopyAB.setBounds ( 65,  5,  60, 20);
-    sliders[0] ->setBounds (300,  4, 240, 20);
+    buttonAB    .setBounds (  3,  5,  60, 20);                                           // magic!
+    buttonCopyAB.setBounds ( 64,  5,  60, 20);
+    labels[0]  ->setBounds (278,  8,  60, 15);
+    sliders[0] ->setBounds (336,  6, 240, 20);
     //sliders[1] ->setBounds (128, 40, 240, 20);
-    labels[0]  ->setBounds (200,  40, 240, 20);
-
-    knob->setBounds (83, 83, knob->getSize() / 2, knob->getSize() / 2); // halved for retina
+    knob       ->setBounds (83, 83, knob->getSize() / 2, knob->getSize() / 2); // halved for retina
 
     /*for (int i = 0; i < sliders.size(); ++i)
     {

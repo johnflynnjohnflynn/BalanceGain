@@ -44,8 +44,8 @@ public:
         setTextBoxStyle (TextBoxBelow, false, 80, 15);
         //setColour (Slider::backgroundColourId,        Colour (0x00000000));
 
-        setColour (Slider::textBoxTextColourId,       Colour (0xff606060));
-        setColour (Slider::textBoxBackgroundColourId, Colour (0x80c0c0c0));
+        setColour (Slider::textBoxTextColourId,       Colour (0xff404040));
+        setColour (Slider::textBoxBackgroundColourId, Colour (0xff707070));
         setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
         setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));
         setSliderStyle (RotaryHorizontalVerticalDrag);
