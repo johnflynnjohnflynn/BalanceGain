@@ -49,6 +49,7 @@ public:
         setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
         setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));
         setSliderStyle (RotaryHorizontalVerticalDrag);
+        setTextValueSuffix(" dB");                                                      // hard coded, not general!
 
         // outlineWhenEditingColourId but how to set?
 
