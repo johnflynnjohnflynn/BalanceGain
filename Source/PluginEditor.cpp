@@ -70,6 +70,9 @@ PluginEditor::PluginEditor (PluginProcessor& p)
 
     sliders.add (knob);
 
+    knob->setDoubleClickReturnValue (true, sliders[0]->getValue()); // current getValue() is
+                                                                    // the default value (0dB)
+
     addAndMakeVisible (knob);
     knob->addListener (this);
 
