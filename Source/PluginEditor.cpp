@@ -151,8 +151,8 @@ void PluginEditor::paint (Graphics& g)
 
 void PluginEditor::resized()
 {
-    buttonAB    .setBounds (  3,  5,  60, 20);                                           // magic!
-    buttonCopyAB.setBounds ( 64,  5,  60, 20);
+    buttonAB    .setBounds (  3,  5,  52, 20);                                           // magic!
+    buttonCopyAB.setBounds ( 56,  5,  52, 20);
     labels[0]  ->setBounds (278,  8,  60, 15);
     sliders[0] ->setBounds (336,  6, 240, 20);
     //sliders[1] ->setBounds (128, 40, 240, 20);
