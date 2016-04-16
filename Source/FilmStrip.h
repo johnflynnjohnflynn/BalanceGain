@@ -51,20 +51,20 @@ public:
     
     void paint(Graphics& g)
     {
-        const float sliderPosition0to1 = static_cast<float> (valueToProportionOfLength (getValue()));
+        const double sliderPosition0to1 = valueToProportionOfLength (getValue());
 
-        int imagePositionRatio = sliderPosition0to1 * (numFrames - 1);                          // int?!
+        int frameToDisplay = static_cast<int> (sliderPosition0to1 * (numFrames - 1));
 
-        const float rotateAmount = 0.05235987756 * static_cast<int> (sliderPosition0to1 * (numFrames - 1));  //  Magic X2! 3 degrees in radians
+        /*const float rotateAmount = 0.05235987756f * frameToDisplay;  //  Magic X2! 3 degrees in radians
 
         //Logger::outputDebugString((String) sliderPosition0to1);
         //Logger::outputDebugString((String) rotateAmount);
 
         AffineTransform rotationTransform;
-        rotationTransform = rotationTransform.rotated (rotateAmount, getSize() / 2, getSize() / 2);
+        rotationTransform = rotationTransform.rotated (rotateAmount, getSize() / 2.0f, getSize() / 2.0f);
         rotationTransform = rotationTransform.scaled (0.5, 0.5);
 
-        //g.drawImageTransformed (rotatingTexture, rotationTransform);
+        //g.drawImageTransformed (rotatingTexture, rotationTransform);*/
 
         g.drawImage (filmStrip,                     // Draw filmstrip then draw
                      0,                             // 'topLayer' image (should have
@@ -72,7 +72,7 @@ public:
                      getSize() / 2,
                      getSize() / 2,
                      0,
-                     imagePositionRatio * width,
+                     frameToDisplay * width,
                      getSize(),
                      getSize());
 
