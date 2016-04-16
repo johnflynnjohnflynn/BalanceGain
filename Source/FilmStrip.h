@@ -57,8 +57,8 @@ public:
 
         const float rotateAmount = 0.05235987756 * static_cast<int> (sliderPosition0to1 * (numFrames - 1));  //  Magic X2! 3 degrees in radians
 
-        Logger::outputDebugString((String) sliderPosition0to1);
-        Logger::outputDebugString((String) rotateAmount);
+        //Logger::outputDebugString((String) sliderPosition0to1);
+        //Logger::outputDebugString((String) rotateAmount);
 
         AffineTransform rotationTransform;
         rotationTransform = rotationTransform.rotated (rotateAmount, getSize() / 2, getSize() / 2);
