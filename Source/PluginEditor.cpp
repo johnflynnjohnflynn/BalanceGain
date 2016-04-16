@@ -45,7 +45,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
 
     stepSizeSlider->setSliderStyle (Slider::LinearHorizontal);
     stepSizeSlider->setTextBoxStyle (Slider::TextBoxLeft,false,60,15);         // magic!
-    stepSizeSlider->setColour (Slider::textBoxTextColourId,       Colour (0xff2b2b2b));
+    stepSizeSlider->setColour (Slider::textBoxTextColourId,       Colour (0xff373737));
     stepSizeSlider->setColour (Slider::textBoxBackgroundColourId, Colour (0xff707070));
     stepSizeSlider->setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
     stepSizeSlider->setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));
