@@ -17,15 +17,6 @@
 
 //==============================================================================
 /**
-    Simple stepped gain plugin
-    --------------------------
-
-    - Gain control stepped
-    - Step size variable
-    - Very precise step size values allowed (i.e. many decimal places)
-    - Double precision enabled
-    - A/B compare function
-
 */
 class PluginProcessor  : public AudioProcessor
 {

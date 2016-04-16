@@ -28,7 +28,7 @@
 class FilmStrip  : public Slider                                        // rename to knob?
 {
 public:
-    FilmStrip (Image filmStripImage, Image topLayerImage)
+    FilmStrip (Image filmStripImage, Image topLayerImage /*, Image rotatingTextureImage*/)
         : Slider {},
           filmStrip {filmStripImage},
           topLayer  {topLayerImage},
@@ -40,20 +40,13 @@ public:
         jassert (filmStripHeight > width);
         jassert (numFrames > 1);
 
-        //setTextBoxStyle (NoTextBox, 0, 0, 0);
         setTextBoxStyle (TextBoxBelow, false, 80, 15);
-        //setColour (Slider::backgroundColourId,        Colour (0x00000000));
-
         setColour (Slider::textBoxTextColourId,       Colour (0xff404040));
         setColour (Slider::textBoxBackgroundColourId, Colour (0xff707070));
         setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
         setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));
         setSliderStyle (RotaryHorizontalVerticalDrag);
-        setTextValueSuffix(" dB");                                                      // hard coded, not general!
-
-        // outlineWhenEditingColourId but how to set?
-
-        // LookAndFeel_V3 laf;
+        setTextValueSuffix(" dB");                                                      // hard coded! not general!
     }
     
     void paint(Graphics& g)
@@ -91,7 +84,7 @@ public:
     }
 
     int getSize() { return width; } // return vertical/horizontal dimension of our
-                                     // square component.
+                                    // square component.
     
 private:
     const Image filmStrip;

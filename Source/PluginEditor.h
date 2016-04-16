@@ -18,11 +18,6 @@
 
 //==============================================================================
 /**
-    Simple generic editor
-    ---------------------
-    
-    - Generates controls automatically from parameters in plugin processor
-    - A/B comparisons
 */
 class PluginEditor  : public AudioProcessorEditor,
                       public Button::Listener,
@@ -48,7 +43,6 @@ private:
 
     Image backgroundImage;
     Image knobStyleImage;
-    //Image knobTexture;
     Image filmstripImage;
 
     FilmStrip* knob;
@@ -57,18 +51,6 @@ private:
 
     void setProcParamFromSlider (const Slider& slider) const;
     void updateSlidersFromProcParams();
-    
-    /*enum relativeLayout {                   // Measurements for relative layout
-        unit = 8,
-        width = 64 * unit,
-        margin = 2 * unit,
-        widthComponent = width - margin * 2,
-        heightComponent = 3 * unit,
-        heightButtonsAB = 5 * unit - 2,
-        buttonABWidth = 100,
-        buttonCopyABWidth = 50,
-        utilityBarHeight = 20,
-    };*/
 
     PluginProcessor& processor;
 
