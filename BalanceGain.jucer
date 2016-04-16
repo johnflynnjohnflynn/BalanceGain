@@ -13,8 +13,8 @@
               companyEmail="contact@balancemastering.com" pluginAUMainType="">
   <MAINGROUP id="KVgBPa" name="BalanceGain">
     <GROUP id="{FBC9BF48-88A1-85B2-ED6A-A0707F5A9A38}" name="Resources">
-      <FILE id="V6YivR" name="BalanceGain_01-fs8.png" compile="0" resource="1"
-            file="Resources/BalanceGain_01-fs8.png"/>
+      <FILE id="YQgNzV" name="BalanceGain_02-fs8.png" compile="0" resource="1"
+            file="Resources/BalanceGain_02-fs8.png"/>
       <FILE id="rZ8euf" name="knob05LargeForeground4-fs8.png" compile="0"
             resource="1" file="Resources/knob05LargeForeground4-fs8.png"/>
       <FILE id="xEHERu" name="markerFilmstrip-fs8.png" compile="0" resource="1"

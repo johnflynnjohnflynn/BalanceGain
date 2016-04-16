@@ -17,8 +17,8 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     : AudioProcessorEditor (&p),
       buttonAB ("A-B"),
       buttonCopyAB ("Copy"),
-      backgroundImage {ImageCache::getFromMemory (BinaryData::BalanceGain_01fs8_png,
-                                                  BinaryData::BalanceGain_01fs8_pngSize)},
+      backgroundImage {ImageCache::getFromMemory (BinaryData::BalanceGain_02fs8_png,
+                                                  BinaryData::BalanceGain_02fs8_pngSize)},
       knobStyleImage  {ImageCache::getFromMemory (BinaryData::knob05LargeForeground4fs8_png,
                                                   BinaryData::knob05LargeForeground4fs8_pngSize)},
       //knobTexture     {ImageCache::getFromMemory (BinaryData::knob05LargeTextureOnlyRotatedfs8_png,
@@ -27,12 +27,12 @@ PluginEditor::PluginEditor (PluginProcessor& p)
                                                   BinaryData::markerFilmstripfs8_pngSize)},
       processor (p)
 {
-    buttonAB.setColour (TextButton::textColourOffId, Colour (0xff404040));
+    buttonAB.setColour (TextButton::textColourOffId, Colour (0xff373737));
     buttonAB.setColour (TextButton::buttonColourId, Colour (0xff808080));
     addAndMakeVisible (buttonAB);
     buttonAB.addListener (this);
 
-    buttonCopyAB.setColour (TextButton::textColourOffId, Colour (0xff404040));
+    buttonCopyAB.setColour (TextButton::textColourOffId, Colour (0xff373737));
     buttonCopyAB.setColour (TextButton::buttonColourId, Colour (0xff808080));
     addAndMakeVisible (buttonCopyAB);
     buttonCopyAB.addListener (this);
@@ -45,7 +45,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
 
     stepSizeSlider->setSliderStyle (Slider::LinearHorizontal);
     stepSizeSlider->setTextBoxStyle (Slider::TextBoxLeft,false,60,15);         // magic!
-    stepSizeSlider->setColour (Slider::textBoxTextColourId,       Colour (0xff404040));
+    stepSizeSlider->setColour (Slider::textBoxTextColourId,       Colour (0xff2b2b2b));
     stepSizeSlider->setColour (Slider::textBoxBackgroundColourId, Colour (0xff707070));
     stepSizeSlider->setColour (Slider::textBoxHighlightColourId,  Colour (0xffffffff));
     stepSizeSlider->setColour (Slider::textBoxOutlineColourId,    Colour (0x00000000));
@@ -70,7 +70,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
 
     stepSizeLabel->setJustificationType (Justification::centredLeft);
     stepSizeLabel->setEditable (false, false, false);
-    stepSizeLabel->setColour (Label::textColourId, Colour (0xff404040));/*
+    stepSizeLabel->setColour (Label::textColourId, Colour (0xff2b2b2b));/*
     stepSizeLabel->setColour (TextEditor::textColourId, Colours::black);
     stepSizeLabel->setColour (TextEditor::backgroundColourId,Colour (0x00000000));*/
 
