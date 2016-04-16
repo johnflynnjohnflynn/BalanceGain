@@ -79,8 +79,8 @@ void PluginProcessor::process (AudioBuffer<FloatType>& buffer, MidiBuffer& /*mid
         buffer.clear (i, 0, buffer.getNumSamples());    // clear junk channels
 
     // per-block basis gain (fine for stepped control)
-    const float gndB = getParam(gain).get();
-    const float gnLin = Decibels::decibelsToGain (gndB);
+    const FloatType gndB = getParam(gain).get();
+    const FloatType gnLin = Decibels::decibelsToGain (gndB);
     
     for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
         buffer.applyGain (channel, 0, buffer.getNumSamples(), gnLin);
